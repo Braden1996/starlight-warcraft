@@ -1,0 +1,54 @@
+---
+title: starlight-warcraft
+description: A fantasy theme for Starlight, with framed React components forked from warcraftcn/ui.
+template: splash
+hero:
+  tagline: Old gold and warm stone for your Starlight docs, from one line in your plugins list.
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Get started
+      link: guides/getting-started/
+      icon: right-arrow
+    - text: See the components
+      link: guides/components/
+      variant: minimal
+---
+
+import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from "starlight-warcraft/react";
+
+<div class="demo-grid">
+  <Card>
+    <CardHeader>
+      <CardTitle>One plugin line</CardTitle>
+      <CardDescription>
+        <Badge size="sm">Theme</Badge>
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      `plugins: [starlightWarcraft()]` sets the palette, the Cinzel headings and the component styles.
+    </CardContent>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle>Framed components</CardTitle>
+      <CardDescription>
+        <Badge size="sm" variant="secondary">React</Badge>
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      Button, Card, Badge, Input, Panel, Skeleton and Spinner, styled by plain CSS. No Tailwind needed.
+    </CardContent>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle>No game art</CardTitle>
+      <CardDescription>
+        <Badge size="sm" variant="outline">MIT</Badge>
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      The frame textures were drawn for warcraftcn/ui. The package ships no Blizzard textures.
+    </CardContent>
+  </Card>
+</div>

@@ -1,0 +1,25 @@
+name: Bug report
+description: A component or page that looks wrong, or a build failure.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What you expected and what you got
+      description: A screenshot helps. Say whether it happens in dark mode, light mode or both.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The component markup, or the Starlight config and page.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: starlight-warcraft, Astro, Starlight and browser versions
+      placeholder: "starlight-warcraft 0.1.0, astro 7.4.12, @astrojs/starlight 0.43.1, Chrome 150"
+    validations:
+      required: true

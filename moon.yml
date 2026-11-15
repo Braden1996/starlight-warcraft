@@ -1,0 +1,43 @@
+$schema: "./.moon/cache/schemas/project.json"
+
+layer: "configuration"
+tags: ["repo"]
+
+taskOptions:
+  shell: false
+  cache: false
+  runFromWorkspaceRoot: true
+
+tasks:
+  install:
+    description: "bun install from the lockfile (fails if a package.json and bun.lock disagree)"
+    command: "bun"
+    args: ["install", "--frozen-lockfile"]
+  typos:
+    description: "Spelling (_typos.toml)"
+    command: "typos"
+  actionlint:
+    description: "GitHub workflow lint"
+    command: "actionlint"
+  links:
+    description: "Offline link check of every Markdown file"
+    command: "lychee"
+    args: [
+      "--offline",
+      "--include-fragments",
+      "--no-progress",
+      "./*.md",
+      "./.github/**/*.md",
+      "./packages/starlight-warcraft/*.md",
+    ]
+  fmt:
+    description: "Format Markdown, JSON, YAML and TOML (dprint.json)"
+    command: "dprint"
+    args: ["fmt"]
+  fmt-check:
+    description: "dprint check (run `moon run repo:fmt` to fix)"
+    command: "dprint"
+    args: ["check"]
+  check:
+    description: "Aggregator: every repo-wide check"
+    deps: ["~:typos", "~:actionlint", "~:links", "~:fmt-check"]

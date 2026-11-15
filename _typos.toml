@@ -1,0 +1,2 @@
+[files]
+extend-exclude = ["bun.lock", "mise.lock", "demo/dist/", "packages/starlight-warcraft/src/react/spinner-path.ts"]

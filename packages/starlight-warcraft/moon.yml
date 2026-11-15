@@ -1,0 +1,41 @@
+$schema: "../../.moon/cache/schemas/project.json"
+
+layer: "library"
+tags: ["typescript"]
+
+dependsOn: ["repo"]
+
+taskOptions:
+  shell: false
+  cache: false
+  runFromWorkspaceRoot: false
+
+tasks:
+  typecheck:
+    description: "tsrs (TypeScript 7 in Rust) over the source and test projects"
+    command: "bun"
+    args: ["run", "typecheck"]
+    deps: ["repo:install"]
+  lint:
+    description: "oxlint, type-aware through tsrs-lint, warnings are errors"
+    command: "bun"
+    args: ["run", "lint"]
+    deps: ["repo:install"]
+  fmt:
+    description: "Format TypeScript with oxfmt"
+    command: "bun"
+    args: ["run", "fmt"]
+    deps: ["repo:install"]
+  fmt-check:
+    description: "oxfmt check (run `moon run package:fmt` to fix)"
+    command: "bun"
+    args: ["run", "fmt:check"]
+    deps: ["repo:install"]
+  test:
+    description: "bun test: plugin, components and stylesheet tests"
+    command: "bun"
+    args: ["test"]
+    deps: ["repo:install"]
+  check:
+    description: "Aggregator: every package check"
+    deps: ["~:typecheck", "~:lint", "~:fmt-check", "~:test"]

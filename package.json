@@ -1,0 +1,13 @@
+{
+  "name": "starlight-warcraft-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Workspace for starlight-warcraft: the package, its demo site and repository scripts.",
+  "type": "module",
+  "workspaces": ["packages/*", "demo"],
+  "devDependencies": {
+    "@types/bun": "1.4.4",
+    "@types/node": "26.6.6"
+  },
+  "packageManager": "bun@1.4.4"
+}

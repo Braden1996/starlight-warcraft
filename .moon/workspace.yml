@@ -1,0 +1,22 @@
+$schema: "./cache/schemas/workspace.json"
+
+versionConstraint: "=2.6.5"
+
+projects:
+  repo: "."
+  package: "packages/starlight-warcraft"
+  demo: "demo"
+
+vcs:
+  client: "git"
+  provider: "github"
+  defaultBranch: "main"
+
+hasher:
+  walkStrategy: "vcs"
+  warnOnMissingInputs: true
+
+pipeline:
+  cacheLifetime: "7 days"
+
+telemetry: false

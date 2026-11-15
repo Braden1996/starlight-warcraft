@@ -1,0 +1,44 @@
+@layer starlight, starlight-warcraft;
+
+@import "./tokens.css";
+@import "./components.css";
+
+@layer starlight-warcraft {
+  :root {
+    --sl-font-heading: var(--wc-font-display);
+
+    --sl-color-white: #fff;
+    --sl-color-gray-1: var(--wc-stone-200);
+    --sl-color-gray-2: var(--wc-stone-300);
+    --sl-color-gray-3: var(--wc-stone-400);
+    --sl-color-gray-4: var(--wc-stone-600);
+    --sl-color-gray-5: var(--wc-stone-700);
+    --sl-color-gray-6: var(--wc-stone-800);
+    --sl-color-black: var(--wc-stone-900);
+    --sl-color-accent-low: var(--wc-gold-950);
+    --sl-color-accent: var(--wc-gold-600);
+    --sl-color-accent-high: var(--wc-gold-200);
+  }
+
+  :root[data-theme="light"] {
+    --sl-color-white: var(--wc-stone-900);
+    --sl-color-gray-1: var(--wc-stone-800);
+    --sl-color-gray-2: var(--wc-stone-700);
+    --sl-color-gray-3: var(--wc-stone-500);
+    --sl-color-gray-4: var(--wc-stone-400);
+    --sl-color-gray-5: var(--wc-stone-300);
+    --sl-color-gray-6: var(--wc-stone-200);
+    --sl-color-gray-7: var(--wc-stone-100);
+    --sl-color-black: #fff;
+    --sl-color-accent-low: var(--wc-gold-200);
+    --sl-color-accent: var(--wc-gold-600);
+    --sl-color-accent-high: var(--wc-gold-900);
+  }
+
+  .sl-markdown-content :is(h1, h2, h3),
+  h1#_top,
+  .site-title {
+    font-family: var(--wc-font-display);
+    letter-spacing: 0.02em;
+  }
+}

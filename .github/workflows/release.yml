@@ -1,0 +1,63 @@
+name: release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@d5574b52816a478f9d4e6529a3f6ff17a8a36785 # v5.2.8
+        with:
+          cache: false
+      - name: gate
+        env:
+          MOON_CACHE: write
+        run: mise exec -- moon run :check
+      - name: version matches tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if ! grep -q "\"version\": \"${TAG#v}\"" packages/starlight-warcraft/package.json; then
+            echo "::error file=packages/starlight-warcraft/package.json::version is not ${TAG#v}"
+            exit 1
+          fi
+      - name: release notes
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          awk -v v="${TAG#v}" 'index($0, "## [" v "]") == 1 {on=1; next} /^## / && on {exit} on && !/^\[.*\]: http/' CHANGELOG.md > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then echo "::error file=CHANGELOG.md::no section for ${TAG#v}"; exit 1; fi
+          cat notes.md
+      - name: pack
+        working-directory: packages/starlight-warcraft
+        run: mise exec -- bun pm pack --destination ../..
+      - name: publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          tarball="starlight-warcraft-${TAG#v}.tgz"
+          test -f "$tarball"
+          sha256sum "$tarball" > SHA256SUMS
+          gh release create "$TAG" "$tarball" SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file notes.md --verify-tag
+      - name: npm publish
+        env:
+          TAG: ${{ github.ref_name }}
+        run: mise exec -- npm publish "starlight-warcraft-${TAG#v}.tgz" --provenance --access public

@@ -1,0 +1,21 @@
+$schema: "../.moon/cache/schemas/project.json"
+
+layer: "application"
+tags: ["docs"]
+
+dependsOn: ["package"]
+
+taskOptions:
+  shell: false
+  cache: false
+  runFromWorkspaceRoot: false
+
+tasks:
+  build:
+    description: "Build the demo site: the theme and components end to end inside Astro"
+    command: "bun"
+    args: ["run", "build"]
+    deps: ["repo:install"]
+  check:
+    description: "Aggregator: the demo site builds"
+    deps: ["~:build"]

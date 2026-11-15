@@ -1,0 +1,163 @@
+---
+title: Components
+description: Every starlight-warcraft React component, with its props.
+---
+
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Panel,
+  Skeleton,
+  Spinner,
+} from "starlight-warcraft/react";
+
+Import every component from `starlight-warcraft/react`. Each one passes the usual HTML attributes through to its
+element, and appends your `className` after its own.
+
+## Button
+
+<div class="demo-row">
+  <Button>Accept quest</Button>
+  <Button variant="frame">Frame</Button>
+  <Button size="sm">Small</Button>
+  <Button variant="frame" size="sm">
+    Small frame
+  </Button>
+  <Button disabled>Disabled</Button>
+</div>
+
+```tsx
+<Button>Accept quest</Button>
+<Button variant="frame" size="sm">Small frame</Button>
+<Button asChild>
+  <a href="/start/">A link styled as a button</a>
+</Button>
+```
+
+| Prop      | Values                 | Default     |
+| --------- | ---------------------- | ----------- |
+| `variant` | `"default"`, `"frame"` | `"default"` |
+| `size`    | `"default"`, `"sm"`    | `"default"` |
+| `asChild` | `boolean`              | `false`     |
+
+`asChild` styles the only child (a link, say) instead of rendering a `button`.
+
+## Card
+
+<div class="demo-grid">
+  <Card>
+    <CardHeader>
+      <CardTitle>The Old Road</CardTitle>
+      <CardDescription>Recommended level 12</CardDescription>
+    </CardHeader>
+    <CardContent>Follow the road east to the watchtower and report to the captain.</CardContent>
+    <CardFooter>
+      <Button size="sm">Accept</Button>
+    </CardFooter>
+  </Card>
+  <Card size="sm">
+    <CardHeader>
+      <CardTitle>Small card</CardTitle>
+      <CardDescription>size="sm"</CardDescription>
+    </CardHeader>
+    <CardContent>A thinner frame and tighter spacing.</CardContent>
+  </Card>
+</div>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>The Old Road</CardTitle>
+    <CardDescription>Recommended level 12</CardDescription>
+  </CardHeader>
+  <CardContent>Follow the road east to the watchtower.</CardContent>
+  <CardFooter>
+    <Button size="sm">Accept</Button>
+  </CardFooter>
+</Card>
+```
+
+`Card` takes `size`: `"default"` or `"sm"`. `CardHeader`, `CardTitle`, `CardDescription`, `CardContent` and
+`CardFooter` are plain `div`s with the matching class.
+
+## Badge
+
+<div class="demo-row">
+  <Badge>Default</Badge>
+  <Badge variant="secondary">Secondary</Badge>
+  <Badge variant="destructive">Destructive</Badge>
+  <Badge variant="outline">Outline</Badge>
+  <Badge shape="shield">Shield</Badge>
+  <Badge shape="banner" size="lg">
+    Banner
+  </Badge>
+  <Badge size="sm">Small</Badge>
+</div>
+
+| Prop      | Values                                                 | Default     |
+| --------- | ------------------------------------------------------ | ----------- |
+| `variant` | `"default"`, `"secondary"`, `"destructive"`, `"outline"` | `"default"` |
+| `size`    | `"default"`, `"sm"`, `"lg"`                            | `"default"` |
+| `shape`   | `"default"`, `"shield"`, `"banner"`                    | `"default"` |
+
+## Input
+
+<div class="demo-stack">
+  <Input placeholder="Search the archives" aria-label="Search the archives" />
+  <Input placeholder="Disabled" aria-label="Disabled" disabled />
+</div>
+
+```tsx
+<Input placeholder="Search the archives" />
+```
+
+## Panel
+
+A tooltip-style panel with an item-quality border.
+
+<div class="demo-grid">
+  <Panel>Common</Panel>
+  <Panel quality="uncommon">Uncommon</Panel>
+  <Panel quality="rare">Rare</Panel>
+  <Panel quality="epic">Epic</Panel>
+  <Panel quality="legendary">Legendary</Panel>
+</div>
+
+```tsx
+<Panel quality="epic">Epic</Panel>
+```
+
+`quality` is `"common"` (the default), `"uncommon"`, `"rare"`, `"epic"` or `"legendary"`. `panelClassName(quality)`
+returns the same classes for elements you render yourself, such as a hover card.
+
+## Skeleton
+
+<div class="demo-stack">
+  <Skeleton style={{ height: "1.25rem", width: "60%" }} />
+  <Skeleton style={{ height: "4rem" }} />
+</div>
+
+```tsx
+<Skeleton style={{ height: "4rem" }} />
+```
+
+## Spinner
+
+<div class="demo-row">
+  <Spinner />
+  <Spinner style={{ width: "4rem", height: "4rem" }} aria-label="Summoning" />
+</div>
+
+```tsx
+<Spinner aria-label="Searching" />
+```
+
+The spinner has `role="status"` and the label "Loading" unless you pass `aria-label`. It stops animating when the
+reader prefers reduced motion.
