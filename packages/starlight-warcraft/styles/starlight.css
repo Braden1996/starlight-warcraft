@@ -1,7 +1,8 @@
-@layer starlight, starlight-warcraft;
+@layer starlight, starlight-luau, starlight-warcraft;
 
 @import "./tokens.css";
 @import "./components.css";
+@import "./code.css";
 
 @layer starlight-warcraft {
   :root {

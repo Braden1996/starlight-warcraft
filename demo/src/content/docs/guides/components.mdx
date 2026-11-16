@@ -12,6 +12,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Disclaimer,
+  HoverCard,
   Input,
   Panel,
   Skeleton,
@@ -136,6 +138,35 @@ A tooltip-style panel with an item-quality border.
 
 `quality` is `"common"` (the default), `"uncommon"`, `"rare"`, `"epic"` or `"legendary"`. `panelClassName(quality)`
 returns the same classes for elements you render yourself, such as a hover card.
+
+## HoverCard
+
+The card that `HoverCards` shows when you hover a name in a checked Luau code block, or a link you give it a source
+for. Its `quality` picks the border, and `error` turns the title red.
+
+<div class="demo-grid">
+  <HoverCard card={{ title: "Inferred type", kind: "Luau, new solver", body: "local frame: Frame" }} />
+  <HoverCard
+    card={{ title: "CreateFrame", kind: "Function · typed", body: "CreateFrame(frameType: string): Frame", quality: "rare" }}
+  />
+  <HoverCard
+    card={{ title: "TypeError", kind: "the line marked -- error", body: "Unknown global 'GetQuestLogTitle'", error: true }}
+  />
+</div>
+
+```tsx
+<HoverCard card={{ title: "CreateFrame", kind: "Function · typed", body: "CreateFrame(frameType: string): Frame", quality: "rare" }} />
+```
+
+Mount `<HoverCards client:idle />` once per page to show these on hover. Pass `sources` for your own anchors.
+
+## Disclaimer
+
+<Disclaimer licence="Code under the MIT licence." />
+
+```tsx
+<Disclaimer licence="Code under the MIT licence." />
+```
 
 ## Skeleton
 

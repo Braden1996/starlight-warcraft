@@ -1,0 +1,195 @@
+@layer starlight-warcraft {
+  :root {
+    --wc-code-keyword: #e0915f;
+    --wc-code-type: var(--wc-gold-300);
+    --wc-code-generic: #f2b779;
+    --wc-code-builtin: #c9a0f0;
+    --wc-code-name: #9cc4e4;
+    --wc-code-property: var(--wc-stone-200);
+    --wc-code-string: #a5c97a;
+    --wc-code-literal: #e5c07b;
+    --wc-code-punctuation: var(--wc-stone-400);
+    --wc-code-error: #f85149;
+    --wc-code-surface: var(--sl-color-bg-inline-code);
+    --wc-code-rule: var(--sl-color-accent);
+
+    --sl-luau-keyword: var(--wc-code-keyword);
+    --sl-luau-type: var(--wc-code-type);
+    --sl-luau-generic: var(--wc-code-generic);
+    --sl-luau-builtin: var(--wc-code-builtin);
+    --sl-luau-string: var(--wc-code-string);
+    --sl-luau-literal: var(--wc-code-literal);
+    --sl-luau-parameter: var(--wc-code-name);
+    --sl-luau-property: var(--wc-code-property);
+    --sl-luau-surface: var(--wc-code-surface);
+    --sl-luau-border: var(--sl-color-gray-5);
+  }
+
+  :root[data-theme="light"] {
+    --wc-code-keyword: #a3461d;
+    --wc-code-type: var(--wc-gold-800);
+    --wc-code-generic: #9a5a12;
+    --wc-code-builtin: #7a3db8;
+    --wc-code-name: #1f5f99;
+    --wc-code-property: var(--wc-stone-800);
+    --wc-code-string: #3f6d1a;
+    --wc-code-literal: #8a5a00;
+    --wc-code-punctuation: var(--wc-stone-500);
+    --wc-code-error: #cf222e;
+  }
+
+  .sl-markdown-content :is(h1, h2, h3, h4) code {
+    padding: 0;
+    background: none;
+    color: var(--sl-color-accent-high);
+    font-size: 0.9em;
+  }
+
+  .sl-markdown-content p:has(> .sl-luau-anchor:only-child) {
+    margin: 0;
+  }
+
+  .sl-markdown-content .sl-luau-note + .sl-luau-source {
+    margin-top: 0.25rem;
+  }
+
+  .sl-markdown-content pre.sl-luau-signature {
+    border-inline-start: 3px solid var(--wc-code-rule);
+    border-radius: 0.25rem;
+  }
+
+  .sl-markdown-content :is(pre.sl-luau-signature, .sl-luau-inline) a {
+    text-decoration-style: dotted;
+    text-decoration-color: currentColor;
+    text-underline-offset: 3px;
+  }
+
+  .sl-markdown-content :has(> .sl-luau-anchor) + .sl-heading-wrapper :is(h3, h4) {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-base);
+    letter-spacing: 0;
+  }
+
+  .sl-markdown-content :has(> .sl-luau-anchor) + .sl-heading-wrapper :is(h3, h4) code {
+    padding: 0;
+    background: none;
+    color: var(--sl-color-white);
+    font-size: inherit;
+    font-weight: 600;
+  }
+
+  .sl-markdown-content .sl-luau-source {
+    font-size: var(--sl-text-xs);
+  }
+
+  .sl-markdown-content .sl-luau-source a {
+    text-decoration: none;
+  }
+
+  .sl-markdown-content .sl-luau-source a:hover {
+    color: var(--sl-color-accent-high);
+  }
+
+  .sl-markdown-content .sl-luau-status {
+    border-radius: 999px;
+    font-weight: 500;
+  }
+
+  .wc-hover-card {
+    max-width: calc(100vw - 16px);
+    padding: 0.75rem 0.9rem;
+  }
+
+  .wc-hover-card[data-floating] {
+    position: fixed;
+    z-index: 100;
+    pointer-events: auto;
+  }
+
+  .wc-hover-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+
+  .wc-hover-card-title {
+    font-weight: 700;
+    color: var(--wc-gold-300);
+  }
+
+  .wc-hover-card-error .wc-hover-card-title {
+    color: var(--wc-blood-500);
+  }
+
+  .wc-hover-card-kind {
+    font-family: var(--sl-font-system);
+    font-size: 0.72rem;
+    letter-spacing: normal;
+    color: var(--wc-stone-400);
+  }
+
+  .wc-hover-card-body {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    max-height: 16rem;
+    overflow: auto;
+    font-family: var(--sl-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: normal;
+    line-height: 1.5;
+    white-space: pre;
+    color: var(--wc-stone-200);
+  }
+
+  .wc-hover-card-error .wc-hover-card-body {
+    white-space: pre-wrap;
+  }
+
+  .wc-hover-card .luau-popup-main,
+  .wc-hover-card .luau-popup-declared {
+    display: block;
+  }
+
+  .wc-hover-card .luau-popup-declared {
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--wc-stone-600);
+  }
+
+  .wc-hover-card .luau-t-keyword {
+    color: #e0915f;
+  }
+
+  .wc-hover-card .luau-t-type {
+    color: var(--wc-gold-300);
+  }
+
+  .wc-hover-card .luau-t-builtin {
+    color: #c9a0f0;
+  }
+
+  .wc-hover-card .luau-t-property {
+    color: #9cc4e4;
+  }
+
+  .wc-hover-card .luau-t-string {
+    color: #a5c97a;
+  }
+
+  .wc-hover-card .luau-t-punctuation {
+    color: var(--wc-stone-400);
+  }
+
+  .wc-disclaimer {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    text-align: center;
+  }
+}
