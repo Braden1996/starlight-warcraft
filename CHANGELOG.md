@@ -21,6 +21,8 @@ All notable changes to this project are documented here. The format follows
 
 - The theme declares its layer after `starlight-luau` as well as `starlight`.
 - Inline code in headings is shown in the accent colour without the inline-code box.
+- Starlight's `Card` and `LinkCard` get the theme: tooltip-style panels with Cinzel titles, each card's border taking
+  its icon colour like an item quality.
 
 ## [0.1.0] - 2026-11-15
 
