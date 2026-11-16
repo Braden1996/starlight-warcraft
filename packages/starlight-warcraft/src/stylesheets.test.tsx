@@ -14,6 +14,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Disclaimer,
+  HoverCard,
   Input,
   Panel,
   Skeleton,
@@ -50,6 +52,8 @@ function everyComponent(): string {
         <CardContent />
         <CardFooter />
       </Card>
+      <Disclaimer />
+      <HoverCard card={{ title: "t", kind: "k", body: "b", error: true }} />
       <Input />
       {QUALITIES.map((quality) => (
         <Panel key={quality} quality={quality} />
@@ -60,8 +64,8 @@ function everyComponent(): string {
   );
 }
 
-describe("components.css", () => {
-  const css = stylesheet("components.css");
+describe("components.css and code.css", () => {
+  const css = `${stylesheet("components.css")}${stylesheet("code.css")}`;
 
   test("styles every class the components render", () => {
     const missing = [...classesIn(everyComponent())].filter((name) => !css.includes(`.${name}`));
@@ -75,7 +79,8 @@ describe("components.css", () => {
   });
 
   test("keeps every rule inside the starlight-warcraft layer so sites can override it", () => {
-    expect(css.trimStart()).toStartWith("@layer starlight-warcraft {");
+    expect(stylesheet("components.css").trimStart()).toStartWith("@layer starlight-warcraft {");
+    expect(stylesheet("code.css").trimStart()).toStartWith("@layer starlight-warcraft {");
   });
 });
 
@@ -90,11 +95,14 @@ describe("starlight.css", () => {
   test("brings in the tokens and the component styles", () => {
     expect(css).toContain('@import "./tokens.css";');
     expect(css).toContain('@import "./components.css";');
+    expect(css).toContain('@import "./code.css";');
   });
 });
 
 describe("layer order", () => {
-  test("declares the theme layer after Starlight's, even when it loads first", () => {
-    expect(stylesheet("starlight.css")).toStartWith("@layer starlight, starlight-warcraft;");
+  test("declares the theme layer after Starlight's and starlight-luau's, even when it loads first", () => {
+    expect(stylesheet("starlight.css")).toStartWith(
+      "@layer starlight, starlight-luau, starlight-warcraft;",
+    );
   });
 });

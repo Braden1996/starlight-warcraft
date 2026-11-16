@@ -1,6 +1,6 @@
 {
   "name": "starlight-warcraft",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A fantasy, Warcraft-inspired theme for Starlight, with React components forked from warcraftcn/ui.",
   "keywords": [
     "starlight",
@@ -28,6 +28,7 @@
     "./styles/fonts.css": "./styles/fonts.css",
     "./styles/starlight.css": "./styles/starlight.css",
     "./styles/components.css": "./styles/components.css",
+    "./styles/code.css": "./styles/code.css",
     "./styles/tokens.css": "./styles/tokens.css"
   },
   "files": [

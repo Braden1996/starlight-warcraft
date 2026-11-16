@@ -32,6 +32,7 @@ Tailwind.
 - [Install](#install)
 - [Add the theme](#add-the-theme)
 - [Use the components](#use-the-components)
+- [Luau docs](#luau-docs)
 - [Cascade layers](#cascade-layers)
 - [Design tokens](#design-tokens)
 - [Without Starlight](#without-starlight)
@@ -95,24 +96,55 @@ import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from "starlig
 </Card>;
 ```
 
-| Component                                                                 | Props beyond the element's own                                                                                                                                |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Button`                                                                  | `variant`: `"default"` or `"frame"`; `size`: `"default"` or `"sm"`; `asChild`: style the only child (a link, say) instead of a button.                        |
-| `Card`                                                                    | `size`: `"default"` or `"sm"`.                                                                                                                                |
-| `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` | None.                                                                                                                                                         |
-| `Badge`                                                                   | `variant`: `"default"`, `"secondary"`, `"destructive"` or `"outline"`; `size`: `"default"`, `"sm"` or `"lg"`; `shape`: `"default"`, `"shield"` or `"banner"`. |
-| `Input`                                                                   | None.                                                                                                                                                         |
-| `Panel`                                                                   | `quality`: `"common"`, `"uncommon"`, `"rare"`, `"epic"` or `"legendary"`. `panelClassName(quality)` gives the same classes for your own elements.             |
-| `Skeleton`                                                                | None.                                                                                                                                                         |
-| `Spinner`                                                                 | None. It has `role="status"` and the label "Loading" unless you pass `aria-label`.                                                                            |
+| Component                                                                 | Props beyond the element's own                                                                                                                                 |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Button`                                                                  | `variant`: `"default"` or `"frame"`; `size`: `"default"` or `"sm"`; `asChild`: style the only child (a link, say) instead of a button.                         |
+| `Card`                                                                    | `size`: `"default"` or `"sm"`.                                                                                                                                 |
+| `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` | None.                                                                                                                                                          |
+| `Badge`                                                                   | `variant`: `"default"`, `"secondary"`, `"destructive"` or `"outline"`; `size`: `"default"`, `"sm"` or `"lg"`; `shape`: `"default"`, `"shield"` or `"banner"`.  |
+| `HoverCard`                                                               | `card`: `{ title, kind, body, quality?, error?, view? }`; `placement`. A tooltip-style card, the one `HoverCards` shows.                                       |
+| `HoverCards`                                                              | `sources`: extra `{ selector, load }` sources. Mount once per page (`client:idle`): it shows a card for luau-web-checker's checked code blocks, and for yours. |
+| `Disclaimer`                                                              | `licence`: a sentence after the notice. The "unofficial, not affiliated with Blizzard" footer notice.                                                          |
+| `Input`                                                                   | None.                                                                                                                                                          |
+| `Panel`                                                                   | `quality`: `"common"`, `"uncommon"`, `"rare"`, `"epic"` or `"legendary"`. `panelClassName(quality)` gives the same classes for your own elements.              |
+| `Skeleton`                                                                | None.                                                                                                                                                          |
+| `Spinner`                                                                 | None. It has `role="status"` and the label "Loading" unless you pass `aria-label`.                                                                             |
 
 Every component passes its element's usual attributes through and appends your `className` after its own. The
 [components page](https://braden1996.github.io/starlight-warcraft/guides/components/) shows each one.
 
+## Luau docs
+
+The theme also skins the pages and code that Luau documentation tools produce, so a Warcraft addon's docs look the
+same whichever tool built them:
+
+- **[starlight-luau](https://github.com/Braden1996/starlight-luau) reference pages**: signatures get the gold rule,
+  headings are set in the monospace font, and the Luau colours come from the `--wc-code-*` tokens. The theme declares
+  its layer after `starlight-luau`'s, so this needs starlight-luau 0.3.0 or later.
+- **[luau-web-checker](https://github.com/Braden1996/luau-web-checker) checked code blocks**: turn the plugin's own
+  tooltips off (`pluginLuauTypes({ ..., tooltips: false })`) and mount `HoverCards` once per page, for example in a
+  `Footer` override. Hovering a name then shows its inferred type, and hovering a marked error shows the error, in a
+  tooltip card.
+
+```astro
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+import { Disclaimer, HoverCards } from "starlight-warcraft/react";
+---
+
+<Default />
+<Disclaimer licence="Code under the MIT licence." />
+<HoverCards client:idle />
+```
+
+To add your own cards, such as for links into an API reference, pass `sources`: each has a CSS `selector` and an async
+`load(anchor)` that returns a card or `undefined`. Errors are checked first, your sources next and inferred types
+last. Define the array once at module level, not inline, so the listeners are not re-attached on every render.
+
 ## Cascade layers
 
 Every rule is in the `starlight-warcraft` cascade layer, which the theme declares straight after Starlight's own
-`starlight` layer. So:
+`starlight` layer and starlight-luau's `starlight-luau` layer. So:
 
 - CSS you write outside a layer overrides the theme;
 - if you declare your own layer order (Tailwind sites do, for example
@@ -122,15 +154,16 @@ Every rule is in the `starlight-warcraft` cascade layer, which the theme declare
 
 The tokens are CSS custom properties on `:root`. Override them in your own CSS.
 
-| Token                              | Use                                      |
-| ---------------------------------- | ---------------------------------------- |
-| `--wc-gold-50` … `--wc-gold-950`   | The accent scale                         |
-| `--wc-stone-50` … `--wc-stone-950` | The grey scale                           |
-| `--wc-font-display`                | Headings and component text (Cinzel)     |
-| `--wc-ring`                        | Focus rings on buttons and inputs        |
-| `--wc-card-foreground`             | Text on the dark frame textures          |
-| `--wc-muted-foreground`            | Card descriptions and input placeholders |
-| `--wc-destructive`                 | Destructive accents                      |
+| Token                                     | Use                                                                                                                                     |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--wc-gold-50` … `--wc-gold-950`          | The accent scale                                                                                                                        |
+| `--wc-stone-50` … `--wc-stone-950`        | The grey scale                                                                                                                          |
+| `--wc-font-display`                       | Headings and component text (Cinzel)                                                                                                    |
+| `--wc-ring`                               | Focus rings on buttons and inputs                                                                                                       |
+| `--wc-card-foreground`                    | Text on the dark frame textures                                                                                                         |
+| `--wc-muted-foreground`                   | Card descriptions and input placeholders                                                                                                |
+| `--wc-destructive`                        | Destructive accents                                                                                                                     |
+| `--wc-code-keyword` … `--wc-code-literal` | Luau colours: `keyword`, `type`, `generic`, `builtin`, `name`, `property`, `string`, `literal`, `punctuation`, `error` (dark and light) |
 
 ## Without Starlight
 
@@ -140,7 +173,10 @@ The components work in any React app. Import the stylesheets yourself:
 import "starlight-warcraft/styles/fonts.css";
 import "starlight-warcraft/styles/tokens.css";
 import "starlight-warcraft/styles/components.css";
+import "starlight-warcraft/styles/code.css";
 ```
+
+`code.css` holds the Luau colours and the hover card; leave it out if you do not use them.
 
 The spinner switches to its dark-mode glow under `[data-theme="dark"]` or `.dark`.
 
