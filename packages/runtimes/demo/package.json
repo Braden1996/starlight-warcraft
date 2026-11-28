@@ -1,0 +1,21 @@
+{
+  "name": "@starlight-warcraft/demo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The starlight-warcraft demo site: the theme and every component, deployed to GitHub Pages.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "catalog:",
+    "@astrojs/starlight": "catalog:",
+    "astro": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "sharp": "catalog:",
+    "starlight-warcraft": "workspace:*"
+  }
+}

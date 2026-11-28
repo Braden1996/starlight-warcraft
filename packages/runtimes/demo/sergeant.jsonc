@@ -1,0 +1,5 @@
+{
+  "name": "@starlight-warcraft/demo",
+  "kind": "astro:app",
+  "dependencies": ["@starlight-warcraft/library"],
+}

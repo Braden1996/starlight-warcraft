@@ -1,0 +1,9 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "Braden1996/sergeant-releases/actions/setup": ref-pin
+        "Braden1996/sergeant-releases/actions/ci": ref-pin
+        "Braden1996/sergeant-releases/actions/deploy-astro-pages": ref-pin
+        "Braden1996/sergeant-releases/actions/release-npm": ref-pin
+        "Braden1996/sergeant-releases/actions/pr-title": ref-pin

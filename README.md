@@ -182,18 +182,17 @@ The spinner switches to its dark-mode glow under `[data-theme="dark"]` or `.dark
 
 ## Development
 
+See the [Sergeant playbook](https://github.com/Braden1996/sergeant#readme) for the workspace toolchain.
+
 ```sh
 mise install
-mise exec -- bun install
-mise exec -- moon run :check
+mise exec -- sgt install
+mise exec -- sgt check
 ```
 
-| Folder                         | What it is                                                 |
-| ------------------------------ | ---------------------------------------------------------- |
-| `packages/starlight-warcraft/` | The package: the plugin, the React components and the CSS. |
-| `demo/`                        | The demo site, deployed to GitHub Pages from `main`.       |
+The library lives in `packages/libraries/ts/dom/starlight-warcraft/`. The demo in `packages/runtimes/demo/` deploys to GitHub Pages from `main`.
 
-[CONTRIBUTING.md](CONTRIBUTING.md) has the house style and the release steps.
+See [Contributing](CONTRIBUTING.md) for local preview and release steps.
 
 ## Credits and licence
 
@@ -201,8 +200,8 @@ starlight-warcraft is MIT-licensed ([LICENSE](LICENSE)).
 
 - The components, the skeleton and spinner styles and the frame textures are forked from
   [warcraftcn/ui](https://github.com/TheOrcDev/warcraftcn-ui) by TheOrcDev (MIT). The fork and its changes are listed
-  in [NOTICE.md](packages/starlight-warcraft/NOTICE.md); the upstream licence is in
-  [LICENSE-warcraftcn.md](packages/starlight-warcraft/LICENSE-warcraftcn.md). Both ship in the npm package.
+  in [NOTICE.md](packages/libraries/ts/dom/starlight-warcraft/src/NOTICE.md); the upstream licence is in
+  [LICENSE-warcraftcn.md](packages/libraries/ts/dom/starlight-warcraft/LICENSE-warcraftcn.md). Both ship in the npm package.
 - [Cinzel](https://fontsource.org/fonts/cinzel) by Natanael Gama is under the SIL Open Font License 1.1, installed
   from `@fontsource/cinzel`.
 - The frame textures were drawn for warcraftcn/ui. The package contains no Blizzard Entertainment game art.

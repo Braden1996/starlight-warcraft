@@ -22,42 +22,23 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: 1.4.4
+          no-cache: true
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 26.13.1
+          package-manager-cache: false
       - uses: jdx/mise-action@d5574b52816a478f9d4e6529a3f6ff17a8a36785 # v5.2.8
         with:
           cache: false
-      - name: gate
-        env:
-          MOON_CACHE: write
-        run: mise exec -- moon run :check
-      - name: version matches tag
-        env:
-          TAG: ${{ github.ref_name }}
-        run: |
-          if ! grep -q "\"version\": \"${TAG#v}\"" packages/starlight-warcraft/package.json; then
-            echo "::error file=packages/starlight-warcraft/package.json::version is not ${TAG#v}"
-            exit 1
-          fi
-      - name: release notes
-        env:
-          TAG: ${{ github.ref_name }}
-        run: |
-          awk -v v="${TAG#v}" 'index($0, "## [" v "]") == 1 {on=1; next} /^## / && on {exit} on && !/^\[.*\]: http/' CHANGELOG.md > notes.md
-          if ! grep -q '[^[:space:]]' notes.md; then echo "::error file=CHANGELOG.md::no section for ${TAG#v}"; exit 1; fi
-          cat notes.md
-      - name: pack
-        working-directory: packages/starlight-warcraft
-        run: mise exec -- bun pm pack --destination ../..
-      - name: publish
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
-        run: |
-          tarball="starlight-warcraft-${TAG#v}.tgz"
-          test -f "$tarball"
-          sha256sum "$tarball" > SHA256SUMS
-          gh release create "$TAG" "$tarball" SHA256SUMS \
-            --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file notes.md --verify-tag
-      - name: npm publish
-        env:
-          TAG: ${{ github.ref_name }}
-        run: mise exec -- npm publish "starlight-warcraft-${TAG#v}.tgz" --provenance --access public
+          install_args: aqua:rhysd/actionlint aqua:zizmorcore/zizmor aqua:lycheeverse/lychee aqua:gitleaks/gitleaks
+      - uses: Braden1996/sergeant-releases/actions/setup@v0.15.0
+        with:
+          seal-sysctl: "true"
+      - uses: Braden1996/sergeant-releases/actions/ci@v0.15.0
+      - uses: Braden1996/sergeant-releases/actions/release-npm@v0.15.0
+        with:
+          working-directory: packages/libraries/ts/dom/starlight-warcraft
+          changelog: ../../../../../CHANGELOG.md

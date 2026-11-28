@@ -1,0 +1,4 @@
+{
+  // Root package.json formatting is owned by `sgt install`.
+  "ignorePatterns": ["package.json"],
+}

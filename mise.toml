@@ -1,15 +1,23 @@
 min_version = "2026.11.2"
 
 [settings]
-lockfile = true
 experimental = true
 
 [tools]
-"aqua:moonrepo/moon" = "2.6.5"
-"bun" = "1.4.4"
-"node" = "26.13.1"
-"aqua:crate-ci/typos" = "1.52.2"
+bun = "1.4.4"
+node = "26.13.1"
 "aqua:rhysd/actionlint" = "1.7.12"
-"aqua:dprint/dprint" = "0.64.3"
+"aqua:zizmorcore/zizmor" = "1.32.0"
 "aqua:lycheeverse/lychee" = "0.24.2"
-"aqua:evilmartians/lefthook" = "2.2.2"
+"aqua:gitleaks/gitleaks" = "8.30.1"
+
+[tools."http:sgt"]
+version = "0.15.0"
+bin_path = "."
+
+[tools."http:sgt".platforms]
+linux-x64 = { url = "https://github.com/Braden1996/sergeant-releases/releases/download/v{{version}}/sgt-x86_64-unknown-linux-musl.tar.gz" }
+linux-arm64 = { url = "https://github.com/Braden1996/sergeant-releases/releases/download/v{{version}}/sgt-aarch64-unknown-linux-musl.tar.gz" }
+macos-arm64 = { url = "https://github.com/Braden1996/sergeant-releases/releases/download/v{{version}}/sgt-aarch64-apple-darwin.tar.gz" }
+macos-x64 = { url = "https://github.com/Braden1996/sergeant-releases/releases/download/v{{version}}/sgt-x86_64-apple-darwin.tar.gz" }
+windows-x64 = { url = "https://github.com/Braden1996/sergeant-releases/releases/download/v{{version}}/sgt-x86_64-pc-windows-msvc.tar.gz" }

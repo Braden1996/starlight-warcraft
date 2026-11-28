@@ -2,12 +2,39 @@
   "name": "starlight-warcraft-workspace",
   "version": "0.0.0",
   "private": true,
-  "description": "Workspace for starlight-warcraft: the package, its demo site and repository scripts.",
+  "description": "Workspace for the starlight-warcraft library and demo site.",
   "type": "module",
-  "workspaces": ["packages/*", "demo"],
-  "devDependencies": {
-    "@types/bun": "1.4.4",
-    "@types/node": "26.6.6"
+  "workspaces": {
+    "packages": [
+      "packages/libraries/ts/*/*",
+      "packages/runtimes/*"
+    ],
+    "catalog": {
+      "@astrojs/react": "7.1.9",
+      "@astrojs/starlight": "0.43.1",
+      "@fontsource/cinzel": "5.3.0",
+      "@radix-ui/react-slot": "1.5.0",
+      "@types/bun": "1.4.4",
+      "@types/node": "26.6.6",
+      "@types/react": "19.3.0",
+      "@types/react-dom": "19.3.0",
+      "astro": "7.4.12",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "sharp": "0.35.5"
+    }
   },
-  "packageManager": "bun@1.4.4"
+  "devDependencies": {
+    "@sgt-build/oxlint-config": "file:../sergeant/dist/npm/sgt-build-oxlint-config-0.15.0.tgz",
+    "@sgt-build/oxlint-config-react": "file:../sergeant/dist/npm/sgt-build-oxlint-config-react-0.15.0.tgz",
+    "@sgt-build/tsconfig": "file:../sergeant/dist/npm/sgt-build-tsconfig-0.15.0.tgz",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "oxlint": "1.93.0",
+    "oxlint-tsgolint": "7.0.2009"
+  },
+  "packageManager": "bun@1.4.4",
+  "overrides": {
+    "@sgt-build/oxlint-config": "file:../sergeant/dist/npm/sgt-build-oxlint-config-0.15.0.tgz"
+  }
 }

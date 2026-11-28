@@ -1,6 +1,5 @@
+.sergeant/
 node_modules/
-.moon/cache/
-.moon/docker/
-demo/dist/
-demo/.astro/
+packages/runtimes/demo/.astro/
+packages/runtimes/demo/dist/
 *.tgz

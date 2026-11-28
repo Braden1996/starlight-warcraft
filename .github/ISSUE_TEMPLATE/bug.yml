@@ -20,6 +20,6 @@ body:
     id: versions
     attributes:
       label: starlight-warcraft, Astro, Starlight and browser versions
-      placeholder: "starlight-warcraft 0.1.0, astro 7.4.12, @astrojs/starlight 0.43.1, Chrome 150"
+      placeholder: "starlight-warcraft 0.2.0, astro 7.4.12, @astrojs/starlight 0.43.1, Chrome 150"
     validations:
       required: true

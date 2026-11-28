@@ -1,0 +1,11 @@
+{
+  "$schema": "./.sergeant/schema.json",
+  "plugins": ["ts", "bun", "oxlint", "astro", "actionlint", "zizmor", "lychee", "secrets"],
+  "packages": ["packages/libraries/*/*/*", "packages/runtimes/*"],
+  "boundaries": {
+    "noUnitCycles": true,
+  },
+  "cache": {
+    "untrackable": "degrade",
+  },
+}

@@ -4,26 +4,19 @@ Thank you for helping. This page covers setup, the checks, and the house style.
 
 ## Setup
 
-1. Install [mise](https://mise.jdx.dev). It installs every pinned tool, including Bun, Node and moon:
+See the [Sergeant playbook](https://github.com/Braden1996/sergeant#readme) for the toolchain and commands. Install [mise](https://mise.jdx.dev), then run:
 
-   ```sh
-   mise install
-   mise exec -- bun install
-   mise exec -- lefthook install
-   ```
+```sh
+mise install
+mise exec -- sgt install
+mise exec -- sgt check
+```
 
-2. Run the gate. CI runs the same command from a cold cache:
+Run `mise exec -- sgt test` and `mise exec -- sgt build` before opening a pull request. Start the demo with
+`mise exec -- bun --cwd packages/runtimes/demo run dev`.
 
-   ```sh
-   mise exec -- moon run :check
-   ```
-
-3. See your change in the demo site:
-
-   ```sh
-   cd demo
-   mise exec -- bun run dev
-   ```
+Until the 0.15.0 release is published, put the local Sergeant release binary on PATH and supply the three npm
+tarballs in `../sergeant/dist/npm/`. Exclude `http:sgt` from mise by setting `MISE_DISABLE_TOOLS=http:sgt`.
 
 ## Style
 
@@ -31,18 +24,17 @@ Thank you for helping. This page covers setup, the checks, and the house style.
   better name or a test.
 - **Colocated tests.** Every `x.tsx` has an `x.test.tsx` beside it. `src/stylesheets.test.tsx` checks that every class
   a component renders is styled and that every texture exists.
-- **Strict types.** The TypeScript config is the strictest available, checked by tsrs. Do not use `any`, non-null
-  assertions or unchecked casts.
+- **Strict types.** Sergeant checks TypeScript. Avoid `any`, non-null assertions, and unchecked casts.
 - **Plain CSS.** Components use `wc-*` classes and data attributes, all inside `@layer starlight-warcraft`. Do not add
   Tailwind or a CSS-in-JS dependency: consumers must not need either.
 - **No game art.** Do not add textures, icons or fonts taken from a Blizzard game.
 - **Upstream changes.** When you take something from warcraftcn/ui, record it in
-  `packages/starlight-warcraft/NOTICE.md`.
+  `packages/libraries/ts/dom/starlight-warcraft/src/NOTICE.md`.
 
 ## Screenshots
 
 The README screenshots in `.github/screenshots/` come from the demo site at 1280 pixels wide. Build and serve it with
-`bun run build` and `bun run preview` in `demo/`, then capture the home page (dark) and the components page (dark and
+`bun run build` and `bun run preview` in `packages/runtimes/demo/`, then capture the home page (dark) and the components page (dark and
 light) with any headless Chromium, for example:
 
 ```sh
@@ -58,7 +50,7 @@ msedge --headless=new --force-dark-mode --window-size=1280,900 --screenshot=home
 
 ## Releases
 
-1. Bump `version` in `packages/starlight-warcraft/package.json`.
+1. Bump `version` in `packages/libraries/ts/dom/starlight-warcraft/package.json`.
 2. Move the "Unreleased" notes into a version section in `CHANGELOG.md`, then merge.
 3. Tag `vX.Y.Z` on `main` and push the tag.
 

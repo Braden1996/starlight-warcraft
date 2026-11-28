@@ -1,0 +1,56 @@
+{
+  "name": "starlight-warcraft",
+  "version": "0.2.0",
+  "description": "A fantasy, Warcraft-inspired theme for Starlight, with React components forked from warcraftcn/ui.",
+  "keywords": ["starlight", "starlight-plugin", "starlight-theme", "astro", "react", "warcraft", "theme"],
+  "homepage": "https://braden1996.github.io/starlight-warcraft/",
+  "bugs": "https://github.com/Braden1996/starlight-warcraft/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Braden1996/starlight-warcraft.git",
+    "directory": "packages/libraries/ts/dom/starlight-warcraft"
+  },
+  "license": "MIT",
+  "author": "Braden Marshall",
+  "sideEffects": ["**/*.css"],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react/index.ts",
+    "./styles/fonts.css": "./src/styles/fonts.css",
+    "./styles/starlight.css": "./src/styles/starlight.css",
+    "./styles/components.css": "./src/styles/components.css",
+    "./styles/code.css": "./src/styles/code.css",
+    "./styles/tokens.css": "./src/styles/tokens.css",
+    "./index.ts": "./src/index.ts"
+  },
+  "files": ["src", "!src/**/*.test.ts", "!src/**/*.test.tsx", "LICENSE-warcraftcn.md"],
+  "dependencies": {
+    "@fontsource/cinzel": "catalog:",
+    "@radix-ui/react-slot": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/starlight": "catalog:",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "peerDependencies": {
+    "@astrojs/starlight": ">=0.43.0",
+    "react": ">=19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@astrojs/starlight": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=26.13.1"
+  }
+}

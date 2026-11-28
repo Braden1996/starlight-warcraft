@@ -1,0 +1,16 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["/sergeant.jsonc", "/sergeant.json"],
+      "url": "./.sergeant/schema.json"
+    },
+    {
+      "fileMatch": ["/**/sergeant.jsonc", "/**/sergeant.json", "!/sergeant.jsonc", "!/sergeant.json"],
+      "url": "./.sergeant/schema.unit.json"
+    },
+    {
+      "fileMatch": ["/sergeant.allow.jsonc", "/sergeant.allow.json"],
+      "url": "./.sergeant/schema.allow.json"
+    }
+  ]
+}

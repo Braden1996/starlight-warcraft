@@ -1,0 +1,25 @@
+// Problems that were here before Sergeant was the rule. An entry only shrinks:
+// `sgt fix` lowers a count that is too high, and nothing raises one except `sgt allow`.
+{
+  "$schema": "./.sergeant/schema.allow.json",
+  "allow": [
+    {
+      "rule": "boundaries/unused",
+      "file": "packages/libraries/ts/dom/starlight-warcraft/package.json",
+      "count": 1,
+      "reason": "Cinzel is imported by the exported fonts stylesheet.",
+    },
+    {
+      "rule": "boundaries/barrel",
+      "file": "packages/libraries/ts/dom/starlight-warcraft/src/react/index.ts",
+      "count": 10,
+      "reason": "Public starlight-warcraft/react entry point preserves the published component API.",
+    },
+    {
+      "rule": "boundaries/unused",
+      "file": "packages/runtimes/demo/package.json",
+      "count": 3,
+      "reason": "Astro loads React integration peers and the Sharp image service at build time.",
+    },
+  ],
+}
