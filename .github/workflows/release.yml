@@ -26,11 +26,11 @@ jobs:
         with:
           bun-version: 1.4.4
           no-cache: true
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 26.13.1
           package-manager-cache: false
-      - uses: jdx/mise-action@d5574b52816a478f9d4e6529a3f6ff17a8a36785 # v5.2.8
+      - uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
         with:
           cache: false
           install_args: aqua:rhysd/actionlint aqua:zizmorcore/zizmor aqua:lycheeverse/lychee aqua:gitleaks/gitleaks
